@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-pip \
+    python3-venv \
     libnss3 \
     libatk-bridge2.0-0 \
     libdrm2 \
@@ -33,8 +34,10 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 
 COPY turnstile-solver/requirements.txt /solver/requirements.txt
-RUN pip3 install --no-cache-dir -r /solver/requirements.txt
-RUN python3 -m patchright install chromium
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:${PATH}"
+RUN pip install --no-cache-dir -r /solver/requirements.txt
+RUN python -m patchright install chromium
 
 COPY server.mjs config.json .env.example ./
 COPY turnstile-solver /solver

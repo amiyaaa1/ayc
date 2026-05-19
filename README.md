@@ -119,6 +119,8 @@ Turnstile 求解可能偶发返回 `ERROR_CAPTCHA_UNSOLVABLE`。主服务默认�
 
 说明：Turnstile solver 需要 Chromium（无头浏览器）。在 `Dockerfile.zeabur` 里通过 `python3 -m patchright install chromium` 在镜像构建阶段安装，所以运行日志里通常看不到安装过程；只有构建日志里能看到。
 
+另外，Debian 12 镜像启用了 PEP 668（externally managed environment），Dockerfile 已改为在 `/opt/venv` 中安装 solver 的 Python 依赖，避免 `pip3 install` 构建报错。
+
 ## Docker 部署
 
 ```bash

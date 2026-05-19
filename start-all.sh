@@ -18,7 +18,7 @@ else
   config_path="/app/config.json"
 fi
 
-python /solver/api_solver.py --browser_type chromium --thread 1 --lazy-browser &
+/opt/venv/bin/python /solver/api_solver.py --browser_type chromium --thread 1 --lazy-browser &
 solver_pid=$!
 
 cleanup() {
