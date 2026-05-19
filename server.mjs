@@ -1727,8 +1727,10 @@ class AlmmaService {
         job.updatedAt = nowIso();
       })
       .catch((error) => {
+        const errorText = error?.stack || error?.message || String(error);
+        log(`job failed: ${error?.message || String(error)}`);
         job.status = 'failed';
-        job.error = error.stack || error.message;
+        job.error = errorText;
         job.updatedAt = nowIso();
       });
     return job;

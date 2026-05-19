@@ -114,6 +114,8 @@ Turnstile 求解可能偶发返回 `ERROR_CAPTCHA_UNSOLVABLE`。主服务默认�
 
 `Dockerfile.zeabur` 默认会把 `turnstile.solverBaseUrl` 注入为 `http://127.0.0.1:5000`，不再依赖 `turnstile-solver` 独立容器和内部 DNS。
 
+说明：Turnstile solver 需要 Chromium（无头浏览器）。在 `Dockerfile.zeabur` 里通过 `python3 -m patchright install chromium` 在镜像构建阶段安装，所以运行日志里通常看不到安装过程；只有构建日志里能看到。
+
 ## Docker 部署
 
 ```bash
