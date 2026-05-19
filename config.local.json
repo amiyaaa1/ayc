@@ -1,0 +1,89 @@
+{
+  "$schema": "https://example.local/almma-service.schema.json",
+  "baseUrl": "https://chat.almma.ai",
+  "listen": {
+    "host": "127.0.0.1",
+    "port": 8787
+  },
+  "stateFile": "data/state.json",
+  "auth": {
+    "serviceApiKeyEnv": "ALMMA_SERVICE_API_KEY",
+    "adminApiKeyEnv": "ALMMA_ADMIN_API_KEY",
+    "autoGenerateServiceApiKey": true,
+    "autoGenerateAdminApiKey": true
+  },
+  "limits": {
+    "callsPerAccountKey": 500,
+    "accountKeyTtlDays": 14,
+    "maxEffectiveAccounts": 5,
+    "maxAdminJobs": 20
+  },
+  "account": {
+    "name": "",
+    "randomName": true,
+    "username": "",
+    "password": "",
+    "passwordEnv": "ALMMA_ACCOUNT_PASSWORD"
+  },
+  "mail": {
+    "baseUrl": "https://mail.mui.moe",
+    "baseUrlEnv": "MOEMAIL_BASE_URL",
+    "apiKey": "",
+    "apiKeyEnv": "MOEMAIL_API_KEY",
+    "namePrefix": "",
+    "domain": "moyii.de",
+    "expiryTime": 3600000,
+    "pollIntervalMs": 5000,
+    "timeoutMs": 180000
+  },
+  "turnstile": {
+    "siteKey": "0x4AAAAAACCNP0lJwpDS-WCP",
+    "solverBaseUrl": "http://127.0.0.1:5000",
+    "registerPageUrl": "https://chat.almma.ai/register",
+    "loginPageUrl": "https://chat.almma.ai/login",
+    "maxAttempts": 3,
+    "retryDelayMs": 3000,
+    "pollIntervalMs": 3000,
+    "timeoutMs": 180000
+  },
+  "backendApiKey": {
+    "namePrefix": "agent-key"
+  },
+  "agentDefaults": {
+    "instructions": "",
+    "instructionsEnv": "ALMMA_AGENT_INSTRUCTIONS",
+    "description": "",
+    "provider": "Azure Anthropic",
+    "category": "general",
+    "artifacts": "",
+    "tools": [],
+    "tool_options": {},
+    "edges": [],
+    "conversation_starters": [],
+    "support_contact": {
+      "name": "",
+      "email": ""
+    }
+  },
+  "agents": [
+    {
+      "exposedModelName": "Azure-Anthropic/claude-opus-4-5",
+      "name": "Azure-Anthropic/claude-opus-4-5",
+      "provider": "Azure Anthropic",
+      "model": "claude-opus-4-5"
+    },
+    {
+      "exposedModelName": "Azure-Anthropic/claude-opus-4-1",
+      "name": "Azure-Anthropic/claude-opus-4-1",
+      "provider": "Azure Anthropic",
+      "model": "claude-opus-4-1"
+    }
+  ],
+  "proxy": {
+    "countFailedRequests": true,
+    "systemMessageMode": "leading_system_convert_rest",
+    "systemMarker": "### SYSTEM",
+    "developerMarker": "### DEVELOPER",
+    "outboundProxyUrlEnv": "ALMMA_OUTBOUND_PROXY"
+  }
+}

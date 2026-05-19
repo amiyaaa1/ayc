@@ -1,0 +1,55 @@
+{
+  "$schema": "https://example.local/almma-bootstrap.schema.json",
+  "baseUrl": "https://chat.almma.ai",
+  "account": {
+    "name": "Michael Davis",
+    "username": "",
+    "password": "",
+    "passwordEnv": "ALMMA_ACCOUNT_PASSWORD"
+  },
+  "mail": {
+    "baseUrl": "https://mail.mui.moe",
+    "apiKey": "",
+    "apiKeyEnv": "MOEMAIL_API_KEY",
+    "namePrefix": "almma",
+    "domain": "moemail.app",
+    "expiryTime": 3600000,
+    "pollIntervalMs": 5000,
+    "timeoutMs": 180000
+  },
+  "turnstile": {
+    "siteKey": "0x4AAAAAACCNP0lJwpDS-WCP",
+    "solverBaseUrl": "http://127.0.0.1:5000",
+    "registerPageUrl": "https://chat.almma.ai/register",
+    "loginPageUrl": "https://chat.almma.ai/login",
+    "pollIntervalMs": 3000,
+    "timeoutMs": 180000
+  },
+  "apiKey": {
+    "name": "agent-api-key"
+  },
+  "agent": {
+    "name": "almma-agent",
+    "instructions": "",
+    "instructionsEnv": "ALMMA_AGENT_INSTRUCTIONS",
+    "description": "",
+    "provider": "Azure Anthropic",
+    "model": "claude-opus-4-5",
+    "category": "general",
+    "artifacts": "",
+    "model_parameters": {},
+    "tools": [],
+    "tool_options": {},
+    "edges": [],
+    "conversation_starters": [],
+    "support_contact": {
+      "name": "",
+      "email": ""
+    }
+  },
+  "output": {
+    "stateFile": "almma-bootstrap.state.json",
+    "resultFile": "almma-bootstrap.result.json",
+    "writeResultFile": true
+  }
+}
