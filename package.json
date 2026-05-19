@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node server.mjs --config config.json --env-file .env",
+    "start": "node server.mjs --config config.json",
     "check": "node --check server.mjs && node server.mjs --check-config"
   },
   "engines": {

@@ -26,4 +26,4 @@ cleanup() {
 }
 trap cleanup EXIT
 
-exec node /app/server.mjs --config "$config_path" --env-file /app/.env
+exec node /app/server.mjs --config "$config_path"

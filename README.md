@@ -110,6 +110,8 @@ Turnstile 求解可能偶发返回 `ERROR_CAPTCHA_UNSOLVABLE`。主服务默认�
    - （可选）`ALMMA_OUTBOUND_PROXY`
 5. 启动端口使用 `8787`，访问 `/admin` 进入管理页面。
 
+> 注意：容器启动不再强制依赖 `/app/.env` 文件；Zeabur 直接在面板配置环境变量即可。
+
 `Dockerfile.zeabur` 默认会把 `turnstile.solverBaseUrl` 注入为 `http://127.0.0.1:5000`，不再依赖 `turnstile-solver` 独立容器和内部 DNS。
 
 ## Docker 部署

@@ -12,4 +12,4 @@ RUN mkdir -p /app/data
 
 EXPOSE 8787
 
-CMD ["node", "server.mjs", "--config", "config.json", "--env-file", ".env"]
+CMD ["node", "server.mjs", "--config", "config.json"]
