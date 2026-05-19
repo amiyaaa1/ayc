@@ -52,6 +52,9 @@ cp .env.example .env
 ```env
 MOEMAIL_BASE_URL=https://mail.mui.moe
 MOEMAIL_API_KEY=你的 mail.mui.moe API key
+MOEMAIL_DOMAINS=moyii.de,example.com
+# 可选：如果不填 MOEMAIL_DOMAINS，可改用单域名
+MOEMAIL_DOMAIN=
 ALMMA_AGENT_INSTRUCTIONS=
 ALMMA_SERVICE_API_KEY=svc-your-stable-key
 ALMMA_ADMIN_API_KEY=adm-your-stable-key
@@ -59,7 +62,7 @@ ALMMA_ADMIN_API_KEY=adm-your-stable-key
 
 分发包默认不带 Agent 系统提示词。`ALMMA_AGENT_INSTRUCTIONS` 和 `ALMMA_ACCOUNT_PASSWORD` 都可以留空。Agent 指令也可以在管理页面里改；密码留空时服务会为每个账号生成随机密码并写入 `data/state.json`。
 
-临时邮箱域名在 `config.json` 的 `mail.domain` 里配置。当前本地测试确认 `moyii.de` 可以创建邮箱，所以默认使用 `moyii.de`；如果你的邮件服务配置变化，先调 `GET /api/config` 看 `emailDomains` 后再改这里。
+临时邮箱域名支持多值随机：优先读取 `MOEMAIL_DOMAINS`（可用逗号/空格/换行分隔多个域名），每次注册随机挑一个；若为空则回退到 `MOEMAIL_DOMAIN`，再回退到 `config.json` 的 `mail.domains` / `mail.domain`。
 
 ## Turnstile Solver
 

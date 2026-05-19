@@ -131,6 +131,23 @@ function envOrProcessOrValue(value, envName) {
   return value;
 }
 
+
+function parseMailDomains(mailConfig = {}) {
+  const rawFromEnv = envOrValue('', mailConfig.domainsEnv || 'MOEMAIL_DOMAINS');
+  const listFromEnv = String(rawFromEnv || '')
+    .split(/[
+,;\s]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const listFromConfig = Array.isArray(mailConfig.domains)
+    ? mailConfig.domains.map((item) => String(item || '').trim()).filter(Boolean)
+    : [];
+  const singleDomain = String(envOrValue(mailConfig.domain || '', mailConfig.domainEnv || 'MOEMAIL_DOMAIN') || '').trim();
+  const domains = listFromEnv.length ? listFromEnv : (listFromConfig.length ? listFromConfig : (singleDomain ? [singleDomain] : []));
+  if (!domains.length) throw new Error('mail.domains/mail.domain or MOEMAIL_DOMAINS/MOEMAIL_DOMAIN is required');
+  return domains;
+}
+
 function safeProxyLabel(value) {
   try {
     const url = new URL(value);
@@ -1467,12 +1484,14 @@ class AlmmaService {
     const mailConfig = this.config.mail || {};
     const prefix = String(mailConfig.namePrefix || '').trim();
     const name = `${prefix}${randomEmailLocalPart()}`;
+    const domains = parseMailDomains(mailConfig);
+    const domain = domains[randomBytes(4).readUInt32BE(0) % domains.length];
     const response = await mail('/api/emails/generate', {
       method: 'POST',
       body: {
         name,
         expiryTime: Number(mailConfig.expiryTime || 3600000),
-        domain: mailConfig.domain,
+        domain,
       },
     });
     return extractGeneratedEmail(response);
