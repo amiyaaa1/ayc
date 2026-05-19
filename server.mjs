@@ -120,7 +120,9 @@ function generatedAccountName() {
 }
 
 function envOrValue(value, envName) {
-  return envName && ENV_FILE[envName] ? ENV_FILE[envName] : value;
+  if (envName && ENV_FILE[envName]) return ENV_FILE[envName];
+  if (envName && process.env[envName]) return process.env[envName];
+  return value;
 }
 
 function envOrProcessOrValue(value, envName) {
