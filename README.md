@@ -92,6 +92,9 @@ Turnstile 求解可能偶发返回 `ERROR_CAPTCHA_UNSOLVABLE`。主服务默认�
 
 ## Zeabur 单项目部署（主服务 + Turnstile Solver 同容器）
 
+> Zeabur 如果未手动指定 Dockerfile，默认会读取仓库根目录 `Dockerfile`。
+> 现在根目录 `Dockerfile` 已与 `Dockerfile.zeabur` 保持同一套“单容器（主服务+solver）”启动逻辑，避免误用精简镜像导致只能启动主服务。
+
 如果你在 Zeabur 上不方便维护多服务内网互联，可以直接使用仓库里的 `Dockerfile.zeabur`，一个项目同时拉起：
 
 - OpenAI 代理服务（`8787`）
