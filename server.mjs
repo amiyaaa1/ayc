@@ -135,8 +135,7 @@ function envOrProcessOrValue(value, envName) {
 function parseMailDomains(mailConfig = {}) {
   const rawFromEnv = envOrValue('', mailConfig.domainsEnv || 'MOEMAIL_DOMAINS');
   const listFromEnv = String(rawFromEnv || '')
-    .split(/[
-,;\s]+/)
+    .split(/[\n,;\s]+/)
     .map((item) => item.trim())
     .filter(Boolean);
   const listFromConfig = Array.isArray(mailConfig.domains)
