@@ -1,0 +1,8 @@
+.env
+data/
+*.state.json
+*.result.json
+node_modules/
+__pycache__/
+*.pyc
+dist/

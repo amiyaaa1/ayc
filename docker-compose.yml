@@ -1,0 +1,40 @@
+services:
+  turnstile-solver:
+    build:
+      context: ./turnstile-solver
+    container_name: almma-turnstile-solver
+    restart: unless-stopped
+    shm_size: "1gb"
+    environment:
+      HTTP_PROXY: http://warp:1080
+      HTTPS_PROXY: http://warp:1080
+      ALL_PROXY: http://warp:1080
+      NO_PROXY: 127.0.0.1,localhost,turnstile-solver,almma-turnstile-solver
+      TURNSTILE_BROWSER_PROXY: http://warp:1080
+    expose:
+      - "5000"
+    networks:
+      - default
+      - warp-net
+
+  almma-openai-proxy:
+    build: .
+    container_name: almma-openai-proxy
+    restart: unless-stopped
+    depends_on:
+      - turnstile-solver
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      ALMMA_OUTBOUND_PROXY: http://warp:1080
+    volumes:
+      - ./config.json:/app/config.json:ro
+      - ./.env:/app/.env:ro
+      - ./data:/app/data
+    networks:
+      - default
+      - warp-net
+
+networks:
+  warp-net:
+    external: true

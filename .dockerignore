@@ -1,0 +1,6 @@
+data
+.env
+*.state.json
+*.result.json
+node_modules
+npm-debug.log
